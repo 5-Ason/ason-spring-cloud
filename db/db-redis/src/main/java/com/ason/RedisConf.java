@@ -14,7 +14,6 @@ import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * Created by Ason on 2017-09-23.
- * 这里实现CachingConfigurerSupport主要是方便使用自定义keyGenerator
  */
 @Configuration
 public class RedisConf {

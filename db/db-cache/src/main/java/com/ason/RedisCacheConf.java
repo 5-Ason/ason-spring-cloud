@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 
 /**
  * Created by Ason on 2017/9/25.
+ * 这里实现CachingConfigurerSupport主要是方便使用自定义keyGenerator
  */
 @Configuration
 @EnableCaching // 启用缓存
