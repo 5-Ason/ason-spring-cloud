@@ -3,7 +3,7 @@ spring:
   cloud:
     config:
       name: data
-      profile: dev # 要读取的配置文件profile属性
+      profile: ${spring.profiles.active} # 要读取的配置文件profile属性
 #      uri: http://127.0.0.1:7001
       #label: ${spring.profiles.active}
       discovery:

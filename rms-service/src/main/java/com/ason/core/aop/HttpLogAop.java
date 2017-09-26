@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 请求AOP
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class HttpLogAop {
 
     private static final Log log = LogFactory.get();

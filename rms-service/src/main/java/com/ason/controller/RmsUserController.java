@@ -5,6 +5,8 @@ import com.ason.constant.ApiConstant;
 import com.ason.entity.rms.po.RmsUser;
 import com.ason.result.ResultBody;
 import com.ason.service.RmsUserService;
+import com.xiaoleilu.hutool.log.Log;
+import com.xiaoleilu.hutool.log.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,6 +25,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(ApiConstant.RMS_USER)
 public class RmsUserController {
+    private static final Log log = LogFactory.get();
 
     @Autowired
     private RmsUserService rmsUserService;
@@ -80,6 +83,7 @@ public class RmsUserController {
     @Cacheable(value = "usercache", key = "#account")
     @PostMapping(value = "/account", produces = "application/json;charset=UTF-8")
     public String findUserByAccout(@RequestParam("account") String account) throws Exception {
+        log.info("====打印这句话即代表没有使用缓存====");
         return ResultBody.success(rmsUserService.selectUserByAccout(account));
     }
 

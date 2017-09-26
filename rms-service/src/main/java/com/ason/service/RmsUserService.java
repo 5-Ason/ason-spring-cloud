@@ -100,7 +100,20 @@ public class RmsUserService extends ServiceImpl<RmsUserMapper, RmsUser> {
 
     public RmsUser selectUserByAccout(String account) {
         RmsUser rmsUser = selectOne(new EntityWrapper().where("account = {0}", account));
-        System.err.println("进来说明没使用cache");
         return rmsUser;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
