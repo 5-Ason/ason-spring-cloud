@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ason.db.mapper.rms.RmsUserMapper">
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.ason.entity.rms.po.RmsUser">
+		<id column="id" property="id" />
+		<result column="account" property="account" />
+		<result column="password" property="password" />
+		<result column="name" property="name" />
+		<result column="sex" property="sex" />
+		<result column="birthday" property="birthday" />
+		<result column="phone" property="phone" />
+		<result column="role_id" property="roleId" />
+		<result column="dept_id" property="deptId" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="create_user_id" property="createUserId" />
+	</resultMap>
+
+	<select id="selectUserList" resultType="com.ason.entity.rms.vo.RmsUserVo">
+		select
+		ru.id as id,
+		ru.account as account,
+		ru.password as password,
+		ru.name as name,
+		ru.sex as sex,
+		ru.birthday as birthday,
+		ru.phone as phone,
+		rr.name as roleName,
+		rd.name as deptName,
+		ru.status as status,
+		ru.create_time as createTime,
+		ru2.name as createUserName
+		FROM rms_user ru
+		LEFT JOIN rms_role rr ON ru.role_id = rr.id
+		LEFT JOIN rms_dept rd ON ru.dept_id = rd.id
+		LEFT JOIN rms_user ru2 ON ru.create_user_id = ru2.id
+	</select>
+</mapper>

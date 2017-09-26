@@ -1,0 +1,28 @@
+spring:
+  # 配置中心服务的地址
+  cloud:
+    config:
+      name: data
+      profile: dev # 要读取的配置文件profile属性
+#      uri: http://127.0.0.1:7001
+      #label: ${spring.profiles.active}
+      discovery:
+        enabled: true                                 # 默认false，设为true表示使用注册中心中的configserver配置而不自己配置configserver的uri
+        serviceId: config-server
+  profiles:
+    active: dev
+
+#eureka.client.serviceUrl.defaultZone属性对应服务注册中心的配置内容，指定服务注册中心的位置。
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:1111/eureka/
+  instance:
+    hostname: ason-eureka-server
+    preferIpAddress: true
+
+
+logging:
+  config: classpath:logback/logback-${spring.profiles.active}.xml
+  path: logs/
+  file: rms.log

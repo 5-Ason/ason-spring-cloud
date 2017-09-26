@@ -1,0 +1,25 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native    #开启本地配置 默认为git
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: ../ason-spring-cloud/config-server/config-repo
+# git管理配置
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: https://gitee.com/Ason_5/ason-spring-cloud/
+#          searchPaths: config-server/config-repo
+#          username:  username
+#          password:  password
+
+
+

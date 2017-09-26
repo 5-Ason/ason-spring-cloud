@@ -1,0 +1,16 @@
+#eureka.client.serviceUrl.defaultZone属性对应服务注册中心的配置内容，指定服务注册中心的位置。
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:1111/eureka/
+  instance:
+    hostname: ason-eureka-server
+    preferIpAddress: true
+
+# routes to serviceId
+zuul:
+  routes:
+    api-a:
+      path: /rms/**
+      serviceId:  rms-service
+

@@ -1,0 +1,87 @@
+# ====================mysql====================
+connection:
+  url: jdbc:mysql://ason-hostname:3306/rms_db?useUnicode=true&characterEncoding=utf8
+  username: ason
+  password: ason
+
+
+# ====================druid====================
+druid:
+  # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
+  initialSize: 1
+  #	最小连接池数量
+  minIdle: 1
+  # 最大连接池数量
+  maxActive: 10
+  #	配置获取连接等待超时的时间
+  maxWait: 10000
+  #  配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+  timeBetweenEvictionRunsMillis: 60000
+  #  配置一个连接在池中最小生存的时间，单位是毫秒
+  minEvictableIdleTimeMillis: 300000
+  #  验证连接有效与否的SQL，不同的数据配置不同
+  validationQuery: select 1
+  #  建议配置为true，不影响性能，并且保证安全性。
+  #  申请连接的时候检测，如果空闲时间大于
+  #  timeBetweenEvictionRunsMillis，
+  #  执行validationQuery检测连接是否有效。
+  testWhileIdle: true
+  #  申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+  #  这里建议配置为TRUE，防止取到的连接不可用
+  testOnBorrow: true
+  #  归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+  testOnReturn: false
+  #  是否缓存preparedStatement，也就是PSCache。
+  #  PSCache对支持游标的数据库性能提升巨大，比如说oracle。
+  #  在mysql5.5以下的版本中没有PSCache功能，建议关闭掉。
+  #  作者在5.5版本中使用PSCache，通过监控界面发现PSCache有缓存命中率记录，
+  #  该应该是支持PSCache。
+  #  打开PSCache，并且指定每个连接上PSCache的大小
+  poolPreparedStatements: true
+  maxPoolPreparedStatementPerConnectionSize: 20
+  #  属性类型是字符串，通过别名的方式配置扩展插件，
+  #  常用的插件有：
+  #  监控统计用的filter:stat
+  #  日志用的filter:log4j
+  #  防御sql注入的filter:wall
+  filters: stat
+
+
+# ====================MybatisPlus====================
+mybatisPlus:
+  globalConfig:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    idType: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    fieldStrategy: 2
+    #驼峰下划线转换
+    dbColumnUnderline: true
+    #刷新mapper 调试神器
+    isRefresh: true
+    #数据库大写下划线转换
+    isCapitalMode: true
+    #逻辑删除配置
+    logicDeleteValue: 0
+    logicNotDeleteValue: 1
+
+# ====================redis====================
+redis:
+  # Redis服务器地址
+  host: ason-hostname
+  # Redis服务器连接端口
+  port: 6379
+  # Redis服务器连接密码（默认为空）
+  password:
+  # 连接超时时间（毫秒）
+  timeout: 0
+  # Redis数据库索引（默认为0）
+  database: 0
+  pool:
+    # 连接池最大连接数（使用负值表示没有限制）
+    max-active: 8
+    # 连接池最大阻塞等待时间（使用负值表示没有限制）
+    max-wait: -1
+    # 连接池中的最大空闲连接
+    max-idle: 8
+    # 连接池中的最小空闲连接
+    min-idle: 0

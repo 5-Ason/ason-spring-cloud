@@ -1,0 +1,22 @@
+server:
+  port: 1111
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  # begin  配置关闭自我保护，并配置Eureka Server清理无效节点的时间间隔
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 20000
+  # end
+  instance:
+    hostname: ason-eureka-server
+    perferIpAddress: true
+  client:
+    register-with-eureka: false  # 当前服务不需要到Eureka Server上注册
+    fetch-registry: false  # 不需要从eureka服务器获取注册信息
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/   # Eureka客户端设置Eureka Server的地址
+
+

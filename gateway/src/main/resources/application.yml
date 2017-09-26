@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: gateway
+server:
+  port: 5555
