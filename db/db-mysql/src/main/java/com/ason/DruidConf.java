@@ -1,9 +1,13 @@
 package com.ason;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.support.http.StatViewServlet;
+import com.alibaba.druid.support.http.WebStatFilter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -47,6 +51,11 @@ public class DruidConf {
     @Value("${druid.filters}")
     private String filters;
 
+    @Value("${druid.loginUsername}")
+    private String loginUsername;
+    @Value("${druid.loginPassword}")
+    private String loginPassword;
+
     //	配置数据源
     @Bean(name = "basisDataSource", initMethod = "init", destroyMethod = "close")
     public DruidDataSource initDataSource() {
@@ -74,5 +83,23 @@ public class DruidConf {
             e.printStackTrace();
         }
         return dds;
+    }
+
+    @Bean
+    public ServletRegistrationBean druidServlet() {
+        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+        //设置登录查看信息的账号密码.
+        servletRegistrationBean.addInitParameter("loginUsername",loginUsername);
+        servletRegistrationBean.addInitParameter("loginPassword",loginPassword);
+        return servletRegistrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        filterRegistrationBean.setFilter(new WebStatFilter());
+        filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        return filterRegistrationBean;
     }
 }

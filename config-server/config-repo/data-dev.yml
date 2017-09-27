@@ -45,6 +45,10 @@ druid:
   #  日志用的filter:log4j
   #  防御sql注入的filter:wall
   filters: stat
+  # 访问的用户名
+  loginUsername: ason
+  # 访问的密码
+  loginPassword: ason
 
 
 # ====================MybatisPlus====================
