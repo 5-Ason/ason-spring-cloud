@@ -22,7 +22,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.ason</groupId>
+			<artifactId>db-mysql</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

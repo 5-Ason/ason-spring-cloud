@@ -17,7 +17,7 @@ public class CorsFilter implements Filter {
     private static final Log log = LogFactory.get();
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
-        //"*"存在风险，建议指定可信任的域名来接收响应信息，如"http://www.sosoapi.com"
+        //"*"存在风险，建议指定可信任的域名来接收响应信息，如"http://www.xxxx.com"
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");

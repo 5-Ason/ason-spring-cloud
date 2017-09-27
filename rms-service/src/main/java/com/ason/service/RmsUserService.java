@@ -1,5 +1,6 @@
 package com.ason.service;
 
+import com.ason.cache.CacheService;
 import com.ason.core.exception.RmsException;
 import com.ason.core.exception.RmsExceptionEnum;
 import com.ason.db.mapper.rms.RmsUserMapper;
@@ -16,11 +17,12 @@ import com.xiaoleilu.hutool.date.DatePattern;
 import com.xiaoleilu.hutool.log.Log;
 import com.xiaoleilu.hutool.log.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -35,6 +37,9 @@ public class RmsUserService extends ServiceImpl<RmsUserMapper, RmsUser> {
 
     @Autowired
     private RmsUserMapper rmsUserMapper;
+
+    @Autowired
+    private CacheService cacheService;
 
     /**
      * 查询用户信息
@@ -82,25 +87,12 @@ public class RmsUserService extends ServiceImpl<RmsUserMapper, RmsUser> {
         }
     }
 
-//    @Cacheable(cacheNames = {"users"}, key = "#id" )
-    @Cacheable(value = "baseUserInfo")
-    public RmsUser selectUserById(Integer id) {
-        RmsUser rmsUser = rmsUserMapper.selectById(id);
-//        Collection<String> cacheNames = cacheManager.getCacheNames();
-//        for (String string : cacheNames) {
-//            System.out.println(string);
-//            System.out.println(cacheManager.getCache(string));
-//        }
-        System.out.println("--------------进来说明没有使用缓存-------------------");
-        System.err.println("进来说明没使用cache");
-        return rmsUser;
-
+    public RmsUserVo selectUserById(Integer id) {
+        return cacheService.selectUserById(id);
     }
 
-
-    public RmsUser selectUserByAccout(String account) {
-        RmsUser rmsUser = selectOne(new EntityWrapper().where("account = {0}", account));
-        return rmsUser;
+    public RmsUserVo selectUserByAccout(String account) {
+        return cacheService.selectUserByAccout(account);
     }
 }
 

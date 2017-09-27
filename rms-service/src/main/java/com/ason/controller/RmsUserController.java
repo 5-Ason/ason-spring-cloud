@@ -1,6 +1,7 @@
 package com.ason.controller;
 
 import com.ason.RedisService;
+import com.ason.cache.CacheService;
 import com.ason.constant.ApiConstant;
 import com.ason.entity.rms.po.RmsUser;
 import com.ason.result.ResultBody;
@@ -32,6 +33,9 @@ public class RmsUserController {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private CacheService cacheService;
 
     /**
      * 添加用户
@@ -80,10 +84,8 @@ public class RmsUserController {
     /**
      * 查询单个用户
      */
-    @Cacheable(value = "usercache", key = "#account")
     @PostMapping(value = "/account", produces = "application/json;charset=UTF-8")
     public String findUserByAccout(@RequestParam("account") String account) throws Exception {
-        log.info("====打印这句话即代表没有使用缓存====");
         return ResultBody.success(rmsUserService.selectUserByAccout(account));
     }
 

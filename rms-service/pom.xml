@@ -52,10 +52,6 @@
 			<groupId>com.ason</groupId>
 			<artifactId>db-cache</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.ason</groupId>
-			<artifactId>common</artifactId>
-		</dependency>
 		<!--=====================shiro begin===================-->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>

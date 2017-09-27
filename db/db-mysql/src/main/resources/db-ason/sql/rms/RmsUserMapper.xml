@@ -36,4 +36,31 @@
 		LEFT JOIN rms_dept rd ON ru.dept_id = rd.id
 		LEFT JOIN rms_user ru2 ON ru.create_user_id = ru2.id
 	</select>
+
+	<select id="selectOneUser" resultType="com.ason.entity.rms.vo.RmsUserVo">
+		select
+		ru.id as id,
+		ru.account as account,
+		ru.password as password,
+		ru.name as name,
+		ru.sex as sex,
+		ru.birthday as birthday,
+		ru.phone as phone,
+		rr.name as roleName,
+		rd.name as deptName,
+		ru.status as status,
+		ru.create_time as createTime,
+		ru2.name as createUserName
+		FROM rms_user ru
+		LEFT JOIN rms_role rr ON ru.role_id = rr.id
+		LEFT JOIN rms_dept rd ON ru.dept_id = rd.id
+		LEFT JOIN rms_user ru2 ON ru.create_user_id = ru2.id
+		WHERE 1 = 1
+		<if test="id != null">
+			and ru.id = #{id}
+		</if>
+		<if test="account != null">
+			and ru.account = #{account}
+		</if>
+	</select>
 </mapper>

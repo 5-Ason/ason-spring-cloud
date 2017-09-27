@@ -1,12 +1,10 @@
 package com.ason.shiro;
 
-import com.ason.entity.rms.po.RmsRole;
-import com.ason.entity.rms.po.RmsUser;
-import com.ason.service.RmsMenuService;
+import com.ason.cache.CacheService;
+import com.ason.entity.rms.vo.RmsUserVo;
 import com.ason.service.RmsRoleService;
 import com.ason.service.RmsUserService;
 import com.ason.utils.BlankUtil;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -16,13 +14,12 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 
 /**
  * Created by Ason on 2017/9/8.
  */
-@Component
+//@Component
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
@@ -32,7 +29,7 @@ public class ShiroRealm extends AuthorizingRealm {
     private RmsRoleService rmsRoleService;
 
     @Autowired
-    private RmsMenuService rmsMenuService;
+    private CacheService cacheService;
 
     /**
      * 授权(验证权限时调用)
@@ -55,11 +52,11 @@ public class ShiroRealm extends AuthorizingRealm {
         //将getPrimaryPrincipal()返回的值强制转换为真实身份信息【在doGetAuthenticationInfo()认证通过填充到SimpleAuthenticationInfo中的身份信息】
         String account = (String) principalCollection.getPrimaryPrincipal();
         // TODO: 2017/9/15 查询待优化
-        RmsUser rmsUser = rmsUserService.selectOne(new EntityWrapper().where("account = {0}", account));
-        RmsRole rmsRole = rmsRoleService.selectById(rmsUser.getRoleId());
+        RmsUserVo rmsUser = cacheService.selectUserByAccout(account);
         // 用户拥有的角色
-        authorizationInfo.addRole(rmsRole.getName());
+        authorizationInfo.addRole(rmsUser.getRoleName());
         // 用户拥有的权限
+        // TODO: 2017/9/27 暂时先写死 
         authorizationInfo.addStringPermission("user:list");
         authorizationInfo.addStringPermission("user:add");
         return authorizationInfo;
@@ -74,7 +71,7 @@ public class ShiroRealm extends AuthorizingRealm {
         String account = (String) authenticationToken.getPrincipal();
         //查询用户信息
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-        RmsUser rmsUser = rmsUserService.selectOne(new EntityWrapper().where("account = {0}", account));
+        RmsUserVo rmsUser = cacheService.selectUserByAccout(account);
 
         if (!BlankUtil.isBlank(rmsUser)) { //账号存在
            return new SimpleAuthenticationInfo(account, rmsUser.getPassword(), rmsUser.getName());

@@ -20,7 +20,9 @@ import java.io.Serializable;
  *
  * @since 2017-09-07
  */
-public class RmsUserVo{
+public class RmsUserVo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	private String account;
