@@ -14,21 +14,26 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 
 /**
  * Created by Ason on 2017/9/8.
  */
-//@Component
+@Component
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
+    @Lazy
     private RmsUserService rmsUserService;
 
     @Autowired
+    @Lazy
     private RmsRoleService rmsRoleService;
 
     @Autowired
+    @Lazy  // shiro初始化的早，用到的bean都会在cache初始化之前被初始化，需要为shiro使用到的bean加@Lazy，否则cache不起效
     private CacheService cacheService;
 
     /**
@@ -51,7 +56,6 @@ public class ShiroRealm extends AuthorizingRealm {
         //从principalCollection获取主身份信息
         //将getPrimaryPrincipal()返回的值强制转换为真实身份信息【在doGetAuthenticationInfo()认证通过填充到SimpleAuthenticationInfo中的身份信息】
         String account = (String) principalCollection.getPrimaryPrincipal();
-        // TODO: 2017/9/15 查询待优化
         RmsUserVo rmsUser = cacheService.selectUserByAccout(account);
         // 用户拥有的角色
         authorizationInfo.addRole(rmsUser.getRoleName());
