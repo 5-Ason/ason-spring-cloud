@@ -23,7 +23,7 @@ ason-spring-cloud
 |    └── db-cache -- 使用redis做缓存
 ├── eureka-server -- 注册中心(端口:1111)
 ├── config-server -- 配置中心(端口:7001)
-├── rms-service -- 用户权限管理系统(端口:8888)
+├── rms-service -- 用户权限管理系统[未完成](端口:8888)
 └── gateway  -- 服务网关
 ```
 
@@ -39,4 +39,9 @@ ason-spring-cloud
 
  * 启动顺序：注册中心(1111)、配置中心端口(7001)、权限控制系统的微服务（8888）。
 
+## 相关博文
+##### db-mysql模块中对mybatis-plus的整合：  
+[【springboot系列】springboot整合独立模块Druid + mybatis-plus](https://segmentfault.com/a/1190000011368822)
 
+##### db-redis、db-cache模块中使用Redis作为内存缓存：  
+[【springboot系列】springboot整合独立模块 redis 做缓存](http://note.youdao.com/)
