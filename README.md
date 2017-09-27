@@ -44,4 +44,4 @@ ason-spring-cloud
 [【springboot系列】springboot整合独立模块Druid + mybatis-plus](https://segmentfault.com/a/1190000011368822)
 
 ##### db-redis、db-cache模块中使用Redis作为内存缓存：  
-[【springboot系列】springboot整合独立模块 redis 做缓存](http://note.youdao.com/)
+[【springboot系列】springboot整合独立模块 redis 做缓存](https://segmentfault.com/a/1190000011371804)
