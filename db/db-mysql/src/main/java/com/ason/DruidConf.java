@@ -85,6 +85,10 @@ public class DruidConf {
         return dds;
     }
 
+    /**
+     * druid数据源状态监控.
+     * @return
+     */
     @Bean
     public ServletRegistrationBean druidServlet() {
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
@@ -94,6 +98,10 @@ public class DruidConf {
         return servletRegistrationBean;
     }
 
+    /**
+     * druid过滤器.
+     * @return
+     */
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();

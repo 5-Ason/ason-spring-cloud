@@ -7,8 +7,8 @@ spring:
 eureka:
   # begin  配置关闭自我保护，并配置Eureka Server清理无效节点的时间间隔
   server:
-    enable-self-preservation: false
-    eviction-interval-timer-in-ms: 20000
+    enable-self-preservation: false        # 设为false，关闭自我保护
+    eviction-interval-timer-in-ms: 30000   # 清理间隔（单位毫秒，默认是60*1000）
   # end
   instance:
     hostname: ason-eureka-server
