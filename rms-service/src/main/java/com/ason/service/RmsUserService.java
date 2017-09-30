@@ -16,6 +16,8 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.xiaoleilu.hutool.date.DatePattern;
 import com.xiaoleilu.hutool.log.Log;
 import com.xiaoleilu.hutool.log.LogFactory;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +42,9 @@ public class RmsUserService extends ServiceImpl<RmsUserMapper, RmsUser> {
 
     @Autowired
     private CacheService cacheService;
+
+    @Autowired
+    private SqlSessionFactory factory;
 
     /**
      * 查询用户信息
@@ -87,8 +92,18 @@ public class RmsUserService extends ServiceImpl<RmsUserMapper, RmsUser> {
         }
     }
 
+    //mybatis的一级进行测试，只查询了一次
     public RmsUserVo selectUserById(Integer id) {
-        return cacheService.selectUserById(id);
+        SqlSession sqlSession = factory.openSession(true); // 自动提交事务
+        RmsUserMapper rmsUserMapper = sqlSession.getMapper(RmsUserMapper.class);
+        Map<String,Object> paramsMap = new HashMap<>();
+        paramsMap.put("id",id);
+        RmsUserVo rmsUser = rmsUserMapper.selectOneUser(paramsMap);
+        rmsUserMapper.selectOneUser(paramsMap);
+        rmsUserMapper.selectOneUser(paramsMap);
+        rmsUserMapper.selectOneUser(paramsMap);
+        return rmsUser;
+//        return cacheService.selectUserById(id);
     }
 
     public RmsUserVo selectUserByAccout(String account) {
