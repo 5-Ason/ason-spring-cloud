@@ -11,9 +11,7 @@ import java.util.Set;
  * 逻辑、功能相关描述:验证对象空值，字符串零长，集合无元素
  */
 
-public final class BlankUtil {
-    private BlankUtil() {
-    }
+public class BlankUtil {
     /**
      * Function:判断字符串是否为空或零长
      * @param str 待检查的字符串变量

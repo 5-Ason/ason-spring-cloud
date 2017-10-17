@@ -9,9 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public final class TimeUtil {
-    private TimeUtil() {
-    }
+public class TimeUtil {
 
     /**
      * 获取当前时间戳(秒)

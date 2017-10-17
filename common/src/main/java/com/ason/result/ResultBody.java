@@ -10,9 +10,8 @@ import com.ason.utils.BlankUtil;
  *
  * Created by Ason on 2017/9/13.
  */
-public final class ResultBody {
-    private ResultBody() {
-    }
+public class ResultBody {
+
     /**
      * 响应代码
      */

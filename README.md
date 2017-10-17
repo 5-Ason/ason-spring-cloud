@@ -17,8 +17,8 @@
 ```
 ason-spring-cloud
 ├── common -- 公用模块（含实体类）。
-├── db -- 后台管理模板
-|    ├── db-mysql -- 数据操作模块,集成mybatis-plus
+├── db -- 数据操作模块
+|    ├── db-mysql -- 集成mybatis-plus
 |    ├── db-redis -- redis集成模块
 |    └── db-cache -- 使用redis做缓存
 ├── eureka-server -- 注册中心(端口:1111)
