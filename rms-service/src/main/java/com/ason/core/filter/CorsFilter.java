@@ -15,6 +15,8 @@ import java.io.IOException;
 @Component
 public class CorsFilter implements Filter {
     private static final Log log = LogFactory.get();
+
+    @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
         //"*"存在风险，建议指定可信任的域名来接收响应信息，如"http://www.xxxx.com"
@@ -25,8 +27,12 @@ public class CorsFilter implements Filter {
         log.info("*********************************过滤器被使用**************************");
         chain.doFilter(req, res);
     }
+
+    @Override
     public void init(FilterConfig filterConfig) {
     }
+
+    @Override
     public void destroy() {
     }
 }

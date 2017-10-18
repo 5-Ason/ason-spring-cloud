@@ -22,7 +22,17 @@ import java.util.Map;
 @Mapper
 @Component
 public interface RmsUserMapper extends BaseMapper<RmsUser> {
+    /**
+     * 分页查询用户列表
+     * @param page
+     * @return
+     */
     List<RmsUserVo> selectUserList(Pagination page);
 
+    /**
+     * 根据条件查询用户
+     * @param paramMap
+     * @return
+     */
     RmsUserVo selectOneUser(Map<String,Object> paramMap);
 }

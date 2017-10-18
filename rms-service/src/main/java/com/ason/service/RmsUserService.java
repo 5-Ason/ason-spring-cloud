@@ -77,7 +77,8 @@ public class RmsUserService extends ServiceImpl<RmsUserMapper, RmsUser> {
      * 添加/修改用户
      */
     public void addOrUpdateUser(RmsUser rmsUser) {
-        if (BlankUtil.isBlank(rmsUser.getId())) { //添加
+        // 添加
+        if (BlankUtil.isBlank(rmsUser.getId())) {
             // 判断账号是否重复
             RmsUser theUser = selectOne(new EntityWrapper().where("account = {0}", rmsUser.getAccount()));
             if (!BlankUtil.isBlank(theUser)) {
@@ -92,9 +93,14 @@ public class RmsUserService extends ServiceImpl<RmsUserMapper, RmsUser> {
         }
     }
 
-    //mybatis的一级进行测试，只查询了一次
+    /**
+     * mybatis的一级进行测试，只查询了一次
+     * @param id
+     * @return
+     */
     public RmsUserVo selectUserById(Integer id) {
-        SqlSession sqlSession = factory.openSession(true); // 自动提交事务
+        // 自动提交事务
+        SqlSession sqlSession = factory.openSession(true);
         RmsUserMapper rmsUserMapper = sqlSession.getMapper(RmsUserMapper.class);
         Map<String,Object> paramsMap = new HashMap<>();
         paramsMap.put("id",id);

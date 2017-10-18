@@ -5,7 +5,8 @@ package com.ason.constant;
  * Created by Ason on 2017/8/24.
  */
 public class ApiConstant {
-    /*=====================RMS begin====================*/
+    // =====================RMS begin====================
+
     public static final String RMS = "/rms";
 
     public static final String RMS_USER = RMS + "/user";
@@ -16,7 +17,7 @@ public class ApiConstant {
 
     public static final String RMS_MENU = RMS + "/menu";
 
-    /*=================== ==RMS end======== ============*/
+    // ======================RMS end====================
 
     public static final String VIEW = "/view";
 }

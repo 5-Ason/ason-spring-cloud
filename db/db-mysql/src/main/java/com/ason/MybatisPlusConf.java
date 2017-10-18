@@ -39,26 +39,33 @@ public class MybatisPlusConf {
 	) {
 		log.info("初始化GlobalConfiguration");
 		GlobalConfiguration globalConfig = new GlobalConfiguration();
+		// 主键类型
 		if ( !BlankUtil.isBlank(idType)) {
-			globalConfig.setIdType(idType);  //主键类型
+			globalConfig.setIdType(idType);
 		}
+		// 字段策略
 		if ( !BlankUtil.isBlank(fieldStrategy)) {
-			//		globalConfig.setFieldStrategy(fieldStrategy); //字段策略
+			//		globalConfig.setFieldStrategy(fieldStrategy);
 		}
+		// 驼峰下划线转换
 		if ( !BlankUtil.isBlank(dbColumnUnderline)) {
-			globalConfig.setDbColumnUnderline(dbColumnUnderline);  //驼峰下划线转换
+			globalConfig.setDbColumnUnderline(dbColumnUnderline);
 		}
+		// 刷新mapper 调试神器
 		if ( !BlankUtil.isBlank(isRefresh)) {
-			//		globalConfig.setRefresh(isRefresh); //刷新mapper 调试神器
+			//		globalConfig.setRefresh(isRefresh);
 		}
+		// 数据库大写下划线转换
 		if ( !BlankUtil.isBlank(isCapitalMode)) {
-			globalConfig.setCapitalMode(isCapitalMode); //数据库大写下划线转换
+			globalConfig.setCapitalMode(isCapitalMode);
 		}
+		// 逻辑删除配置
 		if ( !BlankUtil.isBlank(logicDeleteValue)) {
-			//		globalConfig.setLogicDeleteValue(logicDeleteValue);  //逻辑删除配置
+			//		globalConfig.setLogicDeleteValue(logicDeleteValue);
 		}
+		// 逻辑删除配置
 		if ( !BlankUtil.isBlank(logicNotDeleteValue)) {
-			//		globalConfig.setLogicNotDeleteValue(logicNotDeleteValue);  //逻辑删除配置
+			//		globalConfig.setLogicNotDeleteValue(logicNotDeleteValue);
 		}
 		return globalConfig;
 	}
@@ -71,13 +78,16 @@ public class MybatisPlusConf {
 		String configLocation = "classpath:db-ason/mybatis/mybatis-sqlconfig.xml";
 		String typeAliasesPackage = "com.ason.entity.**";
 		MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
-		sqlSessionFactory.setDataSource(dataSource); //数据源
-		sqlSessionFactory.setGlobalConfig(globalConfig); //全局配置
+		// 数据源
+		sqlSessionFactory.setDataSource(dataSource);
+		// 全局配置
+		sqlSessionFactory.setGlobalConfig(globalConfig);
 		Interceptor[] interceptor = {new PaginationInterceptor()};
-		sqlSessionFactory.setPlugins(interceptor); //分页插件
+		// 分页插件
+		sqlSessionFactory.setPlugins(interceptor);
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		try {
-			//自动扫描Mapping.xml文件
+			// 自动扫描Mapping.xml文件
 			sqlSessionFactory.setMapperLocations(resolver.getResources(mapperLocations));
 			sqlSessionFactory.setConfigLocation(resolver.getResource(configLocation));
 			sqlSessionFactory.setTypeAliasesPackage(typeAliasesPackage);

@@ -28,7 +28,8 @@ public class HttpLogAop {
 
     @Before("log()")
     public void doBefore(JoinPoint joinPoint) {
-        startTime.set(System.currentTimeMillis()); //记录时间
+        // 记录时间
+        startTime.set(System.currentTimeMillis());
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -61,7 +62,7 @@ public class HttpLogAop {
         }
 
         log.info("spend time : " + (System.currentTimeMillis() - startTime.get()));
-
+        startTime.remove();
     }
 
 }

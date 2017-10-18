@@ -71,13 +71,14 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        //获取用户的输入的账号.
+        // 获取用户的输入的账号.
         String account = (String) authenticationToken.getPrincipal();
-        //查询用户信息
-        //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
+        // 查询用户信息
+        // 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
         RmsUserVo rmsUser = cacheService.selectUserByAccout(account);
 
-        if (!BlankUtil.isBlank(rmsUser)) { //账号存在
+        // 账号存在
+        if (!BlankUtil.isBlank(rmsUser)) {
            return new SimpleAuthenticationInfo(account, rmsUser.getPassword(), rmsUser.getName());
         }
         return null;

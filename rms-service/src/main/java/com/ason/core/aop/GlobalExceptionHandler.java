@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 统一异常处理
  * Created by Ason on 2017/8/30.
  */
-@ControllerAdvice  //表示 GlobalExceptionHandler 是一个全局的异常处理器.
+//表示 GlobalExceptionHandler 是一个全局的异常处理器.
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
     private static final Log log = LogFactory.get();

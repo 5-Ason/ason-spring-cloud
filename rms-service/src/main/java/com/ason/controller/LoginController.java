@@ -2,6 +2,7 @@ package com.ason.controller;
 
 import com.ason.core.exception.RmsException;
 import com.ason.core.exception.RmsExceptionEnum;
+import com.ason.enums.RememberMeEnum;
 import com.ason.result.ResultBody;
 import com.xiaoleilu.hutool.log.Log;
 import com.xiaoleilu.hutool.log.LogFactory;
@@ -34,9 +35,9 @@ public class LoginController {
     @ResponseBody
     public String submitLogin(@RequestParam(value = "account") String account,
                               @RequestParam(value = "password") String password,
-                              @RequestParam(value = "remember", required = false, defaultValue = "off") String remember) {
+                              @RequestParam(value = "remember", required = false) String remember) {
         UsernamePasswordToken token = new UsernamePasswordToken(account, password);
-        if ("on".equals(remember)) {
+        if (RememberMeEnum.ON.getRemark().equals(remember)) {
             token.setRememberMe(true);
         } else {
             token.setRememberMe(false);
@@ -59,7 +60,6 @@ public class LoginController {
         }
         if (currentSubject.isAuthenticated()) {
             log.info("用户[" + account + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
-            //System.out.println(currentSubject.getPrincipal());
             return ResultBody.success(token);
         }
         return null;

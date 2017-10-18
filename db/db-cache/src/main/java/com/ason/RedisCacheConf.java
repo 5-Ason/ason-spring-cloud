@@ -31,13 +31,14 @@ public class RedisCacheConf  extends CachingConfigurerSupport {
      * @return
      */
     @Bean(name = "cacheManager")
+    @Override
     public CacheManager cacheManager() {
         log.info("初始化CacheManager");
         RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
 //        Map<String, Long> expires = new HashMap<>();
 //        expires.put("cache:user", 36000L);
 //        cacheManager.setExpires(expires);
-        //设置缓存过期时间
+        // 设置缓存过期时间
         //cacheManager.setDefaultExpiration(10000);
         return cacheManager;
     }
@@ -48,6 +49,7 @@ public class RedisCacheConf  extends CachingConfigurerSupport {
      * @return
      */
     @Bean
+    @Override
     public KeyGenerator keyGenerator() {
         return new KeyGenerator() {
             @Override
