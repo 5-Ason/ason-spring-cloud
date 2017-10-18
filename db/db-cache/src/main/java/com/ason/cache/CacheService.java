@@ -20,7 +20,7 @@ public class CacheService {
 
     @Cacheable(value = "usercache", key = "'selectUserById:id_'+#id")
     public RmsUserVo selectUserById(Integer id) {
-        Map<String,Object> paramsMap = new HashMap<>();
+        Map<String,Object> paramsMap = new HashMap<>(1);
         paramsMap.put("id",id);
         RmsUserVo rmsUser = rmsUserMapper.selectOneUser(paramsMap);
         return rmsUser;
@@ -28,7 +28,7 @@ public class CacheService {
 
     @Cacheable(value = "usercache", key = "'selectUserByAccout:account_'+#account")
     public RmsUserVo selectUserByAccout(String account) {
-        Map<String,Object> paramsMap = new HashMap<>();
+        Map<String,Object> paramsMap = new HashMap<>(1);
         paramsMap.put("account",account);
         RmsUserVo rmsUser = rmsUserMapper.selectOneUser(paramsMap);
         return rmsUser;

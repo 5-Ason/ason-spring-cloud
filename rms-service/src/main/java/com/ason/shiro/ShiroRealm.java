@@ -33,7 +33,8 @@ public class ShiroRealm extends AuthorizingRealm {
     private RmsRoleService rmsRoleService;
 
     @Autowired
-    @Lazy  // shiro初始化的早，用到的bean都会在cache初始化之前被初始化，需要为shiro使用到的bean加@Lazy，否则cache不起效
+    // shiro初始化的早，用到的bean都会在cache初始化之前被初始化，需要为shiro使用到的bean加@Lazy，否则cache不起效
+    @Lazy
     private CacheService cacheService;
 
     /**

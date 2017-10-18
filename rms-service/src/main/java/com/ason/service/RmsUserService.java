@@ -53,7 +53,7 @@ public class RmsUserService extends ServiceImpl<RmsUserMapper, RmsUser> {
         Page<Map<String, Object>> page = new Page<>(currentPage, showCount);
         List<Map<String, Object>> rmsUserList = new ArrayList<>();
         for (RmsUserVo rmsUserVo : rmsUserMapper.selectUserList(page)) {
-            Map<String, Object> ruv = new HashMap();
+            Map<String, Object> ruv = new HashMap(16);
             ruv.put("id", rmsUserVo.getId());
             ruv.put("name", rmsUserVo.getName());
             ruv.put("account", rmsUserVo.getAccount());
@@ -102,7 +102,7 @@ public class RmsUserService extends ServiceImpl<RmsUserMapper, RmsUser> {
         // 自动提交事务
         SqlSession sqlSession = factory.openSession(true);
         RmsUserMapper rmsUserMapper = sqlSession.getMapper(RmsUserMapper.class);
-        Map<String,Object> paramsMap = new HashMap<>();
+        Map<String,Object> paramsMap = new HashMap<>(16);
         paramsMap.put("id",id);
         RmsUserVo rmsUser = rmsUserMapper.selectOneUser(paramsMap);
         rmsUserMapper.selectOneUser(paramsMap);

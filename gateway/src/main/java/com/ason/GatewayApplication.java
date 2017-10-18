@@ -5,7 +5,8 @@ import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @EnableZuulProxy
-@SpringCloudApplication//简化配置，整合了@SpringBootApplication、@EnableDiscoveryClient、@EnableCircuitBreaker
+// 简化配置，整合了@SpringBootApplication、@EnableDiscoveryClient、@EnableCircuitBreaker
+@SpringCloudApplication
 public class GatewayApplication {
 
 	public static void main(String[] args) {

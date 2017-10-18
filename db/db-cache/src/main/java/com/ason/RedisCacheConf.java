@@ -19,7 +19,8 @@ import java.lang.reflect.Method;
  * 这里实现CachingConfigurerSupport主要是方便使用自定义keyGenerator
  */
 @Configuration
-@EnableCaching // 启用缓存
+// 启用缓存
+@EnableCaching
 public class RedisCacheConf  extends CachingConfigurerSupport {
 
     @Autowired
