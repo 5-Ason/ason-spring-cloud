@@ -14,7 +14,6 @@
 		<module>rms-service</module>
 		<module>gateway</module>
 		<module>common</module>
-		<module>external</module>
     </modules>
 
 	<parent>
