@@ -14,14 +14,14 @@ import org.springframework.context.annotation.Configuration;
  * Created by Ason on 2017/9/26.
  */
 @Configuration
-public class DataSourceConf {
-    private static final Log log = LogFactory.getLog(DataSourceConf.class);
+public class BasisDataSourceConf {
+    private static final Log log = LogFactory.getLog(BasisDataSourceConf.class);
 
     //	配置数据源
     @Bean(name = "basisDataSource", initMethod = "init", destroyMethod = "close")
     public DruidDataSource initDataSource(BasisDataSourceConnectionProperties bscp,
                                           BasisDataSourceOperationProperties bdop) {
-        log.info("初始化DruidDataSource");
+        log.info("初始化basisDataSource");
         DruidDataSource dds = new DruidDataSource();
         dds.setDriverClassName("com.mysql.jdbc.Driver");
         dds.setUrl(bscp.getUrl());
@@ -51,7 +51,7 @@ public class DataSourceConf {
      * druid数据源状态监控.
      * @return
      */
-    @Bean
+    @Bean(name = "basisServletRegistrationBean")
     public ServletRegistrationBean druidServlet(BasisDataSourceOperationProperties bdop) {
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
         //设置登录查看信息的账号密码.
@@ -64,7 +64,7 @@ public class DataSourceConf {
      * druid过滤器.
      * @return
      */
-    @Bean
+    @Bean(name = "basisFilterRegistrationBean")
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new WebStatFilter());
