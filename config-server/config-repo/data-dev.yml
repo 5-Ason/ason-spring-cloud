@@ -1,12 +1,12 @@
-# ====================mysql====================
-connection:
+# ====================basis.connection====================
+basis.connection:
   url: jdbc:mysql://ason-hostname:3306/rms_db?useUnicode=true&characterEncoding=utf8
   username: ason
   password: ason
 
 
-# ====================druid====================
-druid:
+# =======================basis.druid======================
+basis.druid:
   # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
   initialSize: 1
   #	最小连接池数量

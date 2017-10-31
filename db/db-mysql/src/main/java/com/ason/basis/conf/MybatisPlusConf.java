@@ -1,4 +1,4 @@
-package com.ason;
+package com.ason.basis.conf;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.ason.utils.BlankUtil;
@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +25,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 @Configuration
 public class MybatisPlusConf {
 
-	private static final Log log = LogFactory.getLog(DruidConf.class);
+	private static final Log log = LogFactory.getLog(MybatisPlusConf.class);
 
 	//    mybatisPlus全局配置
 	@Bean(name = "globalConfig")
@@ -70,7 +71,7 @@ public class MybatisPlusConf {
 		return globalConfig;
 	}
 
-	@Bean(name = "sqlSessionFactory")
+	@Bean(name = "basisSqlSessionFactory")
 	public SqlSessionFactory sqlSessionFactory(@Qualifier(value = "globalConfig")GlobalConfiguration globalConfig,
 											   @Qualifier(value = "basisDataSource")DruidDataSource dataSource) throws Exception {
 		log.info("初始化SqlSessionFactory");
@@ -98,10 +99,15 @@ public class MybatisPlusConf {
 		}
 	}
 
+	@Bean(name = "basisSqlSession")
+	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory){
+		return new SqlSessionTemplate(sqlSessionFactory);
+	}
+
 	//    MyBatis 动态扫描
 	@Bean
 	public MapperScannerConfigurer mapperScannerConfigurer() {
-        log.info("初始化MapperScannerConfigurer");
+		log.info("初始化MapperScannerConfigurer");
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
 		String basePackage = "com.ason.db.mapper";
 		mapperScannerConfigurer.setBasePackage(basePackage);
@@ -109,7 +115,7 @@ public class MybatisPlusConf {
 	}
 
 	//    配置事务管理
-	@Bean(name = "transactionManager")
+	@Bean(name = "basisTransactionManager")
 	public DataSourceTransactionManager transactionManager(@Qualifier(value = "basisDataSource")DruidDataSource dataSource) {
 		log.info("初始化DataSourceTransactionManager");
 		return new DataSourceTransactionManager(dataSource);
