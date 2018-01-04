@@ -89,3 +89,12 @@ redis:
     max-idle: 8
     # 连接池中的最小空闲连接
     min-idle: 0
+
+# ====================mongodb====================
+mongo:
+  connection:
+    host: localhost
+    port: 27017
+    userName:
+    password:
+    dbName: ason

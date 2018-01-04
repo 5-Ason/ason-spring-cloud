@@ -33,6 +33,7 @@
 		<druid.version>1.0.13</druid.version>
 		<mysql-connector-java.version>8.0.8-dmr</mysql-connector-java.version>
 		<mybatis-plus.version>2.1.8</mybatis-plus.version>
+		<opentracing-mongo-driver.version>0.0.3</opentracing-mongo-driver.version>
 		<shiro.version>1.4.0</shiro.version>
 	</properties>
 
@@ -88,6 +89,12 @@
 				<artifactId>mybatis-plus</artifactId>
 				<version>${mybatis-plus.version}</version>
 			</dependency>
+			<!--mongodb-->
+			<dependency>
+				<groupId>io.opentracing.contrib</groupId>
+				<artifactId>opentracing-mongo-driver</artifactId>
+				<version>${opentracing-mongo-driver.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -106,6 +113,11 @@
 			<dependency>
 				<groupId>com.ason</groupId>
 				<artifactId>db-redis</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ason</groupId>
+				<artifactId>db-mongodb</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>

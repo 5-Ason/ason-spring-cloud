@@ -20,5 +20,6 @@
 		<module>db-mysql</module>
 		<module>db-redis</module>
 		<module>db-cache</module>
+		<module>db-mongodb</module>
 	</modules>
 </project>
