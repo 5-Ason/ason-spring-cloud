@@ -23,7 +23,7 @@ public class BasisDataSourceConf {
                                           BasisDataSourceOperationProperties bdop) {
         log.info("初始化basisDataSource");
         DruidDataSource dds = new DruidDataSource();
-        dds.setDriverClassName("com.mysql.jdbc.Driver");
+        dds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dds.setUrl(bscp.getUrl());
         dds.setUsername(bscp.getUsername());
         dds.setPassword(bscp.getPassword());

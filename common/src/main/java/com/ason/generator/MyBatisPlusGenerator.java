@@ -46,7 +46,7 @@ public class MyBatisPlusGenerator {
                 return super.processTypeConvert(fieldType);
             }
         });
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("ason");
         dsc.setPassword("ason");
         dsc.setUrl("jdbc:mysql://ason-hostname:3306/rms_db?characterEncoding=utf8");
