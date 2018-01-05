@@ -1,5 +1,6 @@
 package com.ason.db.mongodb;
 
+import com.xiaoleilu.hutool.util.StrUtil;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -56,7 +57,7 @@ public class MongoProperties {
     @Override
     public String toString() {
         StringBuilder fullUrl = new StringBuilder("mongodb://");
-        if (userName != null && password != null){
+        if (StrUtil.isNotBlank(userName) && StrUtil.isNotBlank(password)){
             fullUrl.append(userName).append(":").append(password).append("@");
         }
         fullUrl.append(host).append(":").append(port)
