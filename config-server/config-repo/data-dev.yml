@@ -93,8 +93,8 @@ redis:
 # ====================mongodb====================
 mongo:
   connection:
-    host: localhost
+    host: 127.0.0.1
     port: 27017
     userName:
     password:
-    dbName: ason
+    dbName: newdb
